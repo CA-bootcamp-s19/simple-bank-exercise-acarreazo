@@ -82,6 +82,7 @@ contract SimpleBank {
     function deposit() public payable returns (uint) {
         /* Add the amount to the user's balance, call the event associated with a deposit,
           then return the balance of the user */
+        require(enrolled[msg.sender]==true,"Users should be enrolled before they can make deposits");
         balances[msg.sender] += msg.value;
         emit LogDepositMade(msg.sender,msg.value);
         return balances[msg.sender];
